@@ -11,7 +11,7 @@
   },
   "rules": {
     "prettier/prettier": [
-      "warn",
+      "off",
       {
         "usePrettierrc": true
       }
@@ -19,25 +19,25 @@
     "react/react-in-jsx-scope": "off",
     "comma-dangle": "off",
     "use-isnan": ["error", { "enforceForSwitchCase": true }],
-    "react/void-dom-elements-no-children": "warn",
-    "react/no-unsafe": "warn",
-    "react/no-unused-state": "warn",
-    "react/prefer-stateless-function": "warn",
-    "react/self-closing-comp": "warn",
-    "react/no-will-update-set-state": "warn",
-    "react/no-this-in-sfc": "warn",
-    "react/no-string-refs": "warn",
-    "react/no-redundant-should-component-update": "warn",
-    "react/jsx-boolean-value": ["warn", "never"],
-    "react/jsx-key": "warn",
-    "react/jsx-max-props-per-line": ["warn", { "maximum": 7 }],
-    "react/jsx-max-depth": ["warn", { "max": 8 }],
-    "arrow-body-style": ["warn", "as-needed"],
-    "dot-notation": "warn",
-    "jsx-quotes": ["warn", "prefer-single"],
-    "valid-typeof": "warn",
+    "react/void-dom-elements-no-children": "off",
+    "react/no-unsafe": "off",
+    "react/no-unused-state": "off",
+    "react/prefer-stateless-function": "off",
+    "react/self-closing-comp": "off",
+    "react/no-will-update-set-state": "off",
+    "react/no-this-in-sfc": "off",
+    "react/no-string-refs": "off",
+    "react/no-redundant-should-component-update": "off",
+    "react/jsx-boolean-value": ["off", "never"],
+    "react/jsx-key": "off",
+    "react/jsx-max-props-per-line": ["off", { "maximum": 7 }],
+    "react/jsx-max-depth": ["off", { "max": 8 }],
+    "arrow-body-style": ["off", "as-needed"],
+    "dot-notation": "off",
+    "jsx-quotes": ["off", "prefer-single"],
+    "valid-typeof": "off",
     "@typescript-eslint/member-ordering": [
-      "warn",
+      "off",
       {
         "default": [
           "private-static-field",

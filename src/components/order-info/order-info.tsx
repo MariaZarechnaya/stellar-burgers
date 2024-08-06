@@ -1,21 +1,32 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import {
+  getOrder,
+  fetchUserDetailOrder
+} from '../../services/slices/orderSlice';
+import { IngredientsSelector } from '../../services/slices/ingredientSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const dispatch = useDispatch();
+  const { number } = useParams(); // берем номер заказа из url
+  const id = Number(number);
+  // const id = 48490
 
-  const ingredients: TIngredient[] = [];
+  const orderData = useSelector(getOrder);
+
+  useEffect(() => {
+    console.log('модалка открылась');
+    dispatch(fetchUserDetailOrder(id));
+  }, [dispatch, id]);
+
+  // Отфильтровываем ингредиенты, которые используются в заказе
+  const ingredients: TIngredient[] = useSelector(IngredientsSelector).filter(
+    (ingredient) => orderData?.ingredients.includes(ingredient._id)
+  );
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
