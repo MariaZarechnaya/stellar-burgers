@@ -12,6 +12,5 @@ export const ProfileOrders: FC = () => {
   useEffect(() => {
     dispatch(fetchUserOrders());
   }, [dispatch]);
-
   return <ProfileOrdersUI orders={orders} />;
 };
