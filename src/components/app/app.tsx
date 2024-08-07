@@ -33,7 +33,7 @@ const App = () => {
     dispatch(getIngredients());
     dispatch(verifyUserAuth());
   }, [dispatch]);
-
+  
   return (
     <div className={styles.app}>
       <AppHeader />
