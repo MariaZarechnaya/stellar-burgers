@@ -20,6 +20,7 @@ export const ModalUI: FC<TModalUIProps> = memo(
         </div>
         <div className={styles.content}>{children}</div>
       </div>
+      // оверлей, при клике на который модалка закрывается
       <ModalOverlayUI onClick={onClose} />
     </>
   )
