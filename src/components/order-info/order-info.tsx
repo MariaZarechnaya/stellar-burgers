@@ -4,7 +4,8 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import {
   getOrder,
-  fetchUserDetailOrder
+  fetchUserDetailOrder,
+  clearOrder
 } from '../../services/slices/orderSlice';
 import { IngredientsSelector } from '../../services/slices/ingredientSlice';
 import { useDispatch, useSelector } from '../../services/store';

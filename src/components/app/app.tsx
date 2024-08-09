@@ -18,6 +18,7 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/slices/ingredientSlice';
 import { verifyUserAuth } from '../../services/slices//userSlice';
+import { clearOrder } from '../../services/slices/orderSlice';
 
 import { AppHeader, OrderInfo, Modal, IngredientDetails } from '@components';
 
@@ -33,7 +34,7 @@ const App = () => {
     dispatch(getIngredients());
     dispatch(verifyUserAuth());
   }, [dispatch]);
-  
+
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -88,7 +89,28 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+                  <Route
+            path='/ingredients/:id'
+            element={
+                <IngredientDetails />
+            }
+          />
+                    <Route
+            path='/profile/orders/:number'
+            element={
+              <ProtectedRoute>
+                  <OrderInfo />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path='/feed/:number'
+            element={
+                <OrderInfo />
+            }
+          />
         <Route path='*' element={<NotFound404 />} />
+
       </Routes>
       {backgroundLocation && (
         <Routes>
@@ -97,7 +119,10 @@ const App = () => {
             element={
               <Modal
                 title='Информация о заказе'
-                onClose={() => navigate('/feed')}
+                onClose={() => {
+                  navigate('/feed');
+                  dispatch(clearOrder());
+                }}
               >
                 <OrderInfo />
               </Modal>
@@ -117,7 +142,10 @@ const App = () => {
               <ProtectedRoute>
                 <Modal
                   title='Информация о заказе'
-                  onClose={() => navigate('/profile/orders')}
+                  onClose={() => {
+                    navigate('/profile/orders');
+                    dispatch(clearOrder());
+                  }}
                 >
                   <OrderInfo />
                 </Modal>

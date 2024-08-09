@@ -13,7 +13,6 @@ import {
 
 interface TUserState {
   isAuthChecked: boolean;
-  isAuthenticated: boolean;
   userData: TUser | null;
   loginUserRequest: boolean;
   loginUserError: string;
@@ -24,7 +23,6 @@ interface TUserState {
 
 const initialState: TUserState = {
   isAuthChecked: false, // флаг для статуса проверки токена пользователя
-  isAuthenticated: false, // авторизован ли
   userData: null, // данные пользователя
   loginUserError: '', // ошибка авторизации
   updateError: '', // ошибка отправки обновленных данных пользователя
@@ -96,40 +94,33 @@ export const userSlice = createSlice({
     // Редьюсер для установки флага проверки аутентификации
     setAuthChecked: (state) => {
       state.isAuthChecked = true;
-      state.isAuthenticated = true;
     }
   },
   extraReducers: (bulder) => {
     bulder
       // регистрация
       .addCase(fetchRegisterUser.pending, (state) => {
-        state.isAuthenticated = false;
         state.errorRegistration = '';
       })
       .addCase(fetchRegisterUser.fulfilled, (state, action) => {
         state.userData = action.payload;
-        state.isAuthenticated = true;
         state.errorRegistration = '';
       })
       .addCase(fetchRegisterUser.rejected, (state, action) => {
         state.errorRegistration = 'Возникла ошибка при регистрации';
-        state.isAuthenticated = false;
       })
 
       // логин
       .addCase(loginUser.pending, (state) => {
-        state.isAuthenticated = false;
         state.loginUserRequest = true;
         state.loginUserError = '';
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
         state.loginUserRequest = false;
         state.userData = action.payload;
         state.loginUserError = '';
       })
       .addCase(loginUser.rejected, (state) => {
-        state.isAuthenticated = false;
         state.loginUserRequest = false;
         state.loginUserError = 'Ошибка авторизации';
       })
@@ -138,12 +129,7 @@ export const userSlice = createSlice({
       .addCase(fetchUserData.fulfilled, (state, action) => {
         state.userData = action.payload.user;
       })
-      .addCase(verifyUserAuth.pending, (state) => {
-        state.isAuthenticated = false;
-      })
-      .addCase(verifyUserAuth.fulfilled, (state) => {
-        state.isAuthenticated = true;
-      })
+   
       // обновление личных данных
       .addCase(updateUser.pending, (state) => {
         state.loginUserRequest = true;
@@ -174,7 +160,6 @@ export const userSlice = createSlice({
       });
   },
   selectors: {
-    getIsUserAuth: (state) => state.isAuthenticated,
     getAuthChecked: (state) => state.isAuthChecked,
     getUser: (state) => state.userData,
     getLoginRequest: (state) => state.loginUserRequest,
@@ -186,7 +171,6 @@ export const userDataReducer = userSlice.reducer;
 export const { setAuthChecked } = userSlice.actions;
 export const userDataName = userSlice.name;
 export const {
-  getIsUserAuth,
   getUser,
   getLoginRequest,
   getLoginUserError,

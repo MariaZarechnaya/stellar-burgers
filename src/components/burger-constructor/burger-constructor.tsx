@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector, useDispatch } from '../../services/store';
-import { getIsUserAuth, getUser } from '../../services/slices/userSlice';
+import { getUser } from '../../services/slices/userSlice';
 import {
   getConstructorIngredients,
   clearIngredient
@@ -19,8 +19,7 @@ export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = useSelector(getConstructorIngredients); // стейт собранного бургера
-  // const  isUserData= useSelector (getUser) // авторизован ли пользователь
-  const isAuthenticated = useSelector(getIsUserAuth); // авторизован ли пользователь
+  const  isUserData= useSelector (getUser) // если авторизован у нас щдесь будут данные
   const dispatch = useDispatch();
   const orderRequest = useSelector(getOrderRequest); // запрос на сервер
   const orderModalData = useSelector(getOrder); // данные заказа для модалки
@@ -29,16 +28,18 @@ export const BurgerConstructor: FC = () => {
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
     // если пользователь не авторизован, перенаправляем на страницу логина при попытке оформить заказ
-    if (!isAuthenticated) {
+    if (!isUserData) {
       navigate('/login');
       return;
     }
     // на сервер отправляется массив id ингредиентов string[]
     const orderArray = [
       constructorItems.bun._id,
+      constructorItems.bun._id,
       ...constructorItems.ingredients.map((elem) => elem._id)
     ];
     // отправляем подготовленный массив
+    console.log(orderArray)
     dispatch(makeUserOrder(orderArray));
     // orderModalData
   };

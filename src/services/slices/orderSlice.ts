@@ -42,6 +42,7 @@ export const fetchUserDetailOrder = createAsyncThunk(
 export const fetchUserOrders = createAsyncThunk(
   'order/fetchUserOrderHistory', 
    () => getOrdersApi() 
+ 
 );
 
 const userOrderSlice = createSlice({
@@ -50,19 +51,20 @@ const userOrderSlice = createSlice({
     reducers: {
       clearOrder: (state) => {
         state.order = null;
+        console.log('очистка даннах заказа')
       }
     },
 
     extraReducers: (builder) => {
       builder
-        // данные своего заказа
+        // подробные данные заказа
         .addCase(fetchUserDetailOrder.pending, (state) => {
           state.errorGetOrder = null;
          
         })
         .addCase(fetchUserDetailOrder.fulfilled, (state, action) => {
           state.order = action.payload.orders[0];
-        console.log (action.payload)
+        
           
         })
         .addCase(fetchUserDetailOrder.rejected, (state, action) => {
