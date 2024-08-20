@@ -21,7 +21,7 @@ interface TUserState {
   updateError: string;
 }
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false, // флаг для статуса проверки токена пользователя
   userData: null, // данные пользователя
   loginUserError: '', // ошибка авторизации
@@ -82,7 +82,7 @@ export const logoutUser = createAsyncThunk('authUser/logout', () =>
   logoutApi()
 );
 // очистка хранимой информации
-const clearUserInfo = () => {
+export const clearUserInfo = () => {
   localStorage.clear(); // удаляем инфу из локального хранилища
   deleteCookie('accessToken'); // удаляем токен  из куки
 };
@@ -152,7 +152,9 @@ export const userSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.loginUserRequest = false;
         state.userData = null;
-        clearUserInfo(); // очищаем данные
+        localStorage.clear();
+        deleteCookie('accessToken');
+        // clearUserInfo(); // очищаем данные
       })
       .addCase(logoutUser.rejected, (state) => {
         state.loginUserRequest = false;

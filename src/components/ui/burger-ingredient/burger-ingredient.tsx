@@ -19,6 +19,9 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
         <Link
           className={styles.article}
           to={`/ingredients/${_id}`}
+          data-ingredient = {`${ingredient.type}`}
+          data-ing-name = {`${ingredient.name}`}
+          data-ingId = {`${_id}`}
           state={locationState}
         >
           {/*  если сюда придет 0 каунтер то  его не будет */}

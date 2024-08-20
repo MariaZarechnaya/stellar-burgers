@@ -11,7 +11,7 @@ type TypeIngredientsState = {
     errorGetOrder: string |null
     errorHistoryOrder:string
   }
-  const initialState: TypeIngredientsState = {
+  export const initialState: TypeIngredientsState = {
     order: null,
     userOrderHistory: [],
     orderRequest: false,
@@ -64,8 +64,6 @@ const userOrderSlice = createSlice({
         })
         .addCase(fetchUserDetailOrder.fulfilled, (state, action) => {
           state.order = action.payload.orders[0];
-        
-          
         })
         .addCase(fetchUserDetailOrder.rejected, (state, action) => {
           state.errorGetOrder = 'Order data Error';
