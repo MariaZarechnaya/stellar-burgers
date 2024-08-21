@@ -8,7 +8,7 @@ type TypeIngredientsState = {
   error: string; // текст ошибки
 };
 
-const initialState: TypeIngredientsState = {
+export const initialState: TypeIngredientsState = {
   isLoaded: false,
   ingredients: [],
   error: ''

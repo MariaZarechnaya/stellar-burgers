@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "user": {
+        "name": "Stepan",
+        "email": "m.zarechnaya.m@mail.ru"
+    },
+    "accessToken": "token test accessToken",
+    "refreshToken": "refresh token"
+  }
+
+  

@@ -11,6 +11,7 @@ export const ProfileMenu: FC = () => {
   // обработчик выхода из аккаунта
   const handleLogout = () => {
     dispatch(logoutUser());
+    logoutUser
   };
   return <ProfileMenuUI handleLogout={handleLogout} pathname={pathname} />;
 };

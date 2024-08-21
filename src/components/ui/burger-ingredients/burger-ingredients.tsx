@@ -20,7 +20,7 @@ export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
     onTabClick // обработчик при клике на вкладку
   }) => (
     <>
-      <section className={styles.burger_ingredients}>
+      <section className={styles.burger_ingredients} data-ingredients-section = {'ingredients-section'}>
         {/* // меню вкладок */}
         <nav>
           <ul className={styles.menu}>

@@ -10,7 +10,7 @@ export interface IFeedState {
   isLoaded: boolean;
 }
 
-const initialState: IFeedState = {
+export const initialState: IFeedState = {
   orders: [],
   total: null,
   totalToday: null,
